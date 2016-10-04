@@ -9,8 +9,8 @@ AGE_REPO = 7
 
 def get_trending_repositories():
     created_prior_to_date = date.today() - timedelta(days=1)*AGE_REPO
-    url = 'https://api.github.com/search/repositories?q=+created:>=%\
-           s&sort=stars&order=desc' % (created_prior_to_date)
+    url = 'https://api.github.com/search/repositories?q=+created:>=%s\
+           &sort=stars&order=desc' % (created_prior_to_date)
     response = requests.get(url)
     return response.json()['items'][0:TOP_SIZE]
 
