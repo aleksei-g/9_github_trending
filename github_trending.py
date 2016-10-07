@@ -11,14 +11,10 @@ def get_trending_repositories():
     created_prior_to_date = date.today() -\
         timedelta(days=created_repository_days_ago)
     url = 'https://api.github.com/search/repositories'
-    payload = {'q': '+created:>=%s' % created_prior_to_date,
+    payload = {'q': 'created:>=%s' % created_prior_to_date,
                'sort': 'stars',
                'order': 'desc'}
-    # если не переводить payload в строку запрос кодируется (напр: "+" в "%2B")
-    # и в результате не получаем нужного ответа
-    payload_str = "&".join("%s=%s" % (key, val)
-                           for key, val in payload.items())
-    response = requests.get(url, params=payload_str)
+    response = requests.get(url, params=payload)
     return response.json()['items'][0:TOP_SIZE]
 
 
