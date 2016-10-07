@@ -15,7 +15,7 @@ def get_trending_repositories():
                'sort': 'stars',
                'order': 'desc'}
     response = requests.get(url, params=payload)
-    return response.json()['items'][0:TOP_SIZE]
+    return response.json()['items'][:TOP_SIZE]
 
 
 def get_open_issues_amount(repo_owner, repo_name):
